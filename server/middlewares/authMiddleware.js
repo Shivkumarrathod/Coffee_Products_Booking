@@ -4,11 +4,15 @@ import asyncHandler from "./asynHandler.js";
 
 const authenticate = asyncHandler(async (req,res,next)=>{
    let token
-   token=await req.cookies.user
+   console.log(req.cookies.user);
+   token = await req.cookies.user
+   console.log("token:"+token);
   if (token) {
     try {
         const decoded = validateToken(token)
+        console.log(decoded);
         req.user = await User.findById(decoded.userId).select("-password")
+        console.log(User.findById(decoded.userId).select("-password"));
         next()
     } catch (error) {
         res.status(401)

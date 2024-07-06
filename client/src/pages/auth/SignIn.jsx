@@ -21,12 +21,12 @@ const SignIn = () => {
       navigate('/')
     }
   },[userInfo,navigate])
+  
   const handleLogin=async()=>{
     try {
       const result = await loginUser({email,password})
       dispatch(setCredientials({...result}))
       navigate('/')
-      console.log(result);
     } catch (error) {
       console.log(error.message);
     }
@@ -48,7 +48,7 @@ const SignIn = () => {
           </div>
           <div className='flex flex-col'>
             <label className='p-1'>PASSWORD</label>
-            <input type="text" 
+            <input type="password" 
             value={password}
             onChange={(e)=>setPassword(e.target.value)}
             placeholder='Enter Password'

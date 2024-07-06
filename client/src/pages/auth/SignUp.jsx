@@ -16,7 +16,6 @@ const SignUp = () => {
   const navigate = useNavigate()
 
     const {userInfo} = useSelector(state=>state.auth)
-    console.log(userInfo);
   useEffect(()=>{
     if(userInfo){
       navigate('/')

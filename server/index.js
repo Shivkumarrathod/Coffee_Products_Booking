@@ -1,4 +1,3 @@
-import path from "path";
 import express from 'express'
 import dotenv from 'dotenv'
 import cookieParser from "cookie-parser";
@@ -7,6 +6,7 @@ import cors from 'cors'
 
 //Routes
 import userRouter from './routes/userRoutes.js'
+import categoryRoute from './routes/categoryRoute.js'
 
 dotenv.config()
 const PORT = process.env.PORT || 7000
@@ -19,5 +19,6 @@ app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
 
 app.use('/api/users',userRouter)
+app.use('/api/category',categoryRoute)
 
 app.listen(PORT,()=>console.log(`Server is connected at PORT ${PORT}`))

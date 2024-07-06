@@ -8,12 +8,19 @@ const NavigationBar = () => {
   const [userLoggedIn,setUserLoggedIn] = useState(false)
   const [selectLoginOption,setSelectLoginOption] = useState(false)
   const [showLogout,setShowLogout] = useState(false)
+  const [isAdmin,setIsAdmin] = useState(false)
   const {userInfo} = useSelector(state=>state.auth)
+  console.log(userInfo);
   useEffect(()=>{
     if (userInfo) {
       setUserLoggedIn(true)
+      if (userInfo.isAdmin||userInfo.data?.isAdmin) {
+        setIsAdmin(true)
+      }else{
+        setIsAdmin(false)
+      }
     }
-  },[userInfo,userLoggedIn])
+  },[userInfo,userLoggedIn,isAdmin])
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -22,7 +29,8 @@ const NavigationBar = () => {
     try {
       dispatch(logout())
       setUserLoggedIn(!userLoggedIn)
-      navigate('/')
+      setIsAdmin(false)
+      navigate('/login')
     } catch (error) {
       console.log(error?.data?.message||error.message);
     }
@@ -41,6 +49,12 @@ const NavigationBar = () => {
           <Link to='/' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Home</Link>
           <Link to='/' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Products</Link>
           <Link to='/' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Cart</Link>
+          {isAdmin&&(<>
+            <Link to='/' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Create Product</Link>
+            <Link to='/admin/category' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Create Category</Link>
+            {/* <Link to='/' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Cart</Link> */}
+          </>
+          )}
           {/* <Link to='/' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Home</Link> */}
         </div>
         <div className='w-[10%] p-1'>
