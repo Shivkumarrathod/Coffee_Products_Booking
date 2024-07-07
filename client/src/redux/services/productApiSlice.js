@@ -6,10 +6,17 @@ const productApiSlice = apiSlice.injectEndpoints({
             query: () => '/api/product/allproduct',
         }),
         createProduct:builder.mutation({
-            query:(product)=>({
+            query:({name,description,image,stock,price,quantity,category,brand})=>({
                 url:"/api/product",
                 method:"POST",
-                body:product
+                body:{name,description,image,stock,price,quantity,category,brand}
+            })
+        }),
+        uploadImage:builder.mutation({
+            query:(data)=>({
+                url:"/api/upload",
+                method:"POST",
+                body:data
             })
         })
     })
@@ -17,4 +24,5 @@ const productApiSlice = apiSlice.injectEndpoints({
 export const {
   useCreateProductMutation,
   useGetProductsQuery,
+  useUploadImageMutation,
 } = productApiSlice
