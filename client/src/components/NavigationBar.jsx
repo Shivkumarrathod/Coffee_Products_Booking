@@ -50,7 +50,7 @@ const NavigationBar = () => {
           <Link to='/' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Products</Link>
           <Link to='/' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Cart</Link>
           {isAdmin&&(<>
-            <Link to='/' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Create Product</Link>
+            <Link to='/admin/product' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Create Product</Link>
             <Link to='/admin/category' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Create Category</Link>
             {/* <Link to='/' className='border-b-6 hover:border-b hover:border-white hover:text-red-500 font-bold '>Cart</Link> */}
           </>

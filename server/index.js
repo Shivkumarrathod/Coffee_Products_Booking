@@ -7,6 +7,7 @@ import cors from 'cors'
 //Routes
 import userRouter from './routes/userRoutes.js'
 import categoryRoute from './routes/categoryRoute.js'
+import productRoute from './routes/product.js'
 
 dotenv.config()
 const PORT = process.env.PORT || 7000
@@ -20,5 +21,6 @@ app.use(cookieParser())
 
 app.use('/api/users',userRouter)
 app.use('/api/category',categoryRoute)
+app.use('/api/product',productRoute)
 
 app.listen(PORT,()=>console.log(`Server is connected at PORT ${PORT}`))
