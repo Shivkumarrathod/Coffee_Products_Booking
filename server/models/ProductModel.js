@@ -1,21 +1,37 @@
-import mongoose, { Schema,model } from "mongoose";
+import  mongoose  from "mongoose";
+
 const {ObjectId} = mongoose.Schema
 
-const coffeeProductSchema = new Schema({
-    name:{type:String,required:true},
-    description:{type:String,required:true},
-    image:{type:String,required:true},
-    category:{type:ObjectId,required:true,ref:"Category"},
-    stock:{type:Number,required:true},
-    likes:{
-        count:{type:Number,default:0},
-        users:[{type:ObjectId,ref:"User"}],
+const reviewSchema = mongoose.Schema({
+    name:{
+        type:String,
+        required:true
     },
-    dislike:{
-        count:{type:Number,default:0,},
-        users:[{type:ObjectId,ref:"User"}],
+    rating:{
+        type:Number,
+        required:true
     },
-    price:{type:Number,required:true},
+    comment:{
+        type:String,
+        required:true
+    },
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:"User"
+    }
+
+},{timestamps:true})
+
+const productSchema  = mongoose.Schema({
+    name:{
+        type:String,
+        required:true,
+    },
+    image:{
+        type:String,
+        required:true,
+    },
     brand:{
         type:String,
         required:true,
@@ -24,8 +40,39 @@ const coffeeProductSchema = new Schema({
         type:Number,
         required:true,
     },
+    category:{
+        type:ObjectId,
+        ref:'category',
+        required:true,
+    },
+    description:{
+        type:String,
+        required:true,
+    },
+    reviews:[reviewSchema],
+    rating:{
+        type:Number,
+        default:0,
+        required:true,
+    },
+    numberReview:{
+        type:Number,
+        required:true,
+        default:0
+    },
+    price:{
+        type:Number,
+        required:true,
+        default:0
+    },
+    stock:{
+        type:Number,
+        required:true,
+        default:0
+    },
+
 },{timestamps:true})
 
-const Product = model('Product',coffeeProductSchema)
+const Product = mongoose.model('product',productSchema)
 
 export default Product

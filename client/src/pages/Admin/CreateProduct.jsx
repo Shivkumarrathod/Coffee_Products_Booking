@@ -1,6 +1,8 @@
-import React, { useRef, useState } from 'react'
-import {useGetProductsQuery,useCreateProductMutation,useUploadImageMutation} from '../../redux/services/productApiSlice'
+import React, { useRef, useState,useNavigate } from 'react'
+import {useGetProductsQuery,useCreateProductMutation} from '../../redux/services/productApiSlice'
 import {useGetCategoriesQuery} from '../../redux/services/categoryapiSlice'
+import SingleProduct from '../../components/SingleProduct'
+import { useFirebase } from '../../firebase/firebase'
 
 const CreateProduct = () => {
   const {data:product,isError,isLoading,refetch} = useGetProductsQuery()
@@ -8,9 +10,11 @@ const CreateProduct = () => {
 
   const [allProducts,setAllProducts] = useState(true)
   const [createProduct,setCreateProduct] = useState(false)
+   
+
+  const firebase = useFirebase()
 
   const [ProductCreation] = useCreateProductMutation()
-  const [uploadImage] = useUploadImageMutation()
 
   //product detailse
   const [name,setName] = useState('')
@@ -20,27 +24,33 @@ const CreateProduct = () => {
   const [price,setPrice] = useState('')
   const [quantity,setQuantity] = useState('')
   const [category,setCategory] = useState('')
-  const [image,SetImage] = useState('')
+  const [image,setImage] = useState('')
   const [imageUrl,setImageUrl] = useState('')
  
   const fileInputref = useRef(null)
-
-  console.log(image);
-  const handleSubmit=async()=>{
-    const formDate = new FormData()
-    formDate.append("image",image)
-    try {
-      const res= await uploadImage(formDate).unwrap()
-      setImageUrl(res.image);
-      const product = await ProductCreation({name,description,image:res.image,price,stock,quantity,category,brand}).unwrap()
+  const handleSubmit = async ()=>{
+    try{
+      const imageResult = await firebase.uploadImage(image,'products')
+      console.log(imageResult);
+      const product = await ProductCreation({name,image:imageResult,description,brand,quantity,stock,category,price})
       console.log(product);
+      setName('')
+      setDescription('')
+      setCategory('')
+      setImage('')
+      setBrand('')
+      setPrice('')
+      setQuantity('')
+      setStock('')
+      refetch()
     } catch (error) {
-      console.log(error);
+      console.error(error)
     }
-  }
+}
   const handleImage=()=>{
     fileInputref.current.click()
   }
+
   return (
     <div className='w-full flex'>
       <div className='bg-[#161616] w-[12%] h-[90vh] flex flex-col p-2 mt-2 ml-9'>
@@ -49,8 +59,12 @@ const CreateProduct = () => {
       </div>
       <div className='bg-[#161616] w-[82%] ml-5 mt-2 '>
         {allProducts&&(
-          <div>
-              all Products
+          <div className='flex flex-wrap'>
+              {product?.map((p)=>(
+                <div key={p._id}>
+                  <SingleProduct p={p}/>
+                </div>
+              ))}
           </div>
         )}
         {createProduct&&(
@@ -102,14 +116,14 @@ const CreateProduct = () => {
                    <div>
                     {image?(
                         <div className='w-full flex justify-center items-center h-[80vh]'>
-                           <img src={URL.createObjectURL(image)} alt={image.name} className='mt-2 p-2 w-[25rem] border' />
+                           <img src={URL.createObjectURL(image)} alt={'product'} className='mt-2 p-2 w-[25rem] border' />
                         </div>
                     ):(
                       <div onClick={handleImage}>
                         <input type="file"
                          ref={fileInputref}
                          style={{display:'none'}}
-                          name="image"   onChange={e=>SetImage(e.target.files[0])} />
+                          name="image"   onChange={(e)=>setImage(e.target.files[0])} />
                           <div className='flex justify-center items-center w-full h-[90%] mt-[10rem]'>
                             <div className='border border-dashed w-[15rem] h-[15rem] flex justify-center items-center cursor-pointer'> add Image here</div>
                           </div>

@@ -1,28 +1,30 @@
 import {apiSlice} from './apiSlice'
 
-const productApiSlice = apiSlice.injectEndpoints({
+const productApiSlice  = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getProducts: builder.query({
-            query: () => '/api/product/allproduct',
+            query: () => '/api/product/getProduct',
         }),
         createProduct:builder.mutation({
-            query:({name,description,image,stock,price,quantity,category,brand})=>({
-                url:"/api/product",
+            query: ({name,image,description,brand,quantity,stock,category,price}) => ({
+                url: '/api/product',
                 method:"POST",
-                body:{name,description,image,stock,price,quantity,category,brand}
+                body:{name,image,description,brand,quantity,stock,category,price}
             })
         }),
-        uploadImage:builder.mutation({
-            query:(data)=>({
-                url:"/api/upload",
-                method:"POST",
-                body:data
+        getProductById:builder.query({
+            query:(id)=>({
+                url:`/api/product/products/${id}`,
             })
+        }),
+        getLatestProduct:builder.query({
+            query:()=>('/api/product/recentproduct'),
         })
     })
 })
 export const {
-  useCreateProductMutation,
-  useGetProductsQuery,
-  useUploadImageMutation,
+useGetProductsQuery,
+useCreateProductMutation,
+useGetProductByIdQuery,
+useGetLatestProductQuery
 } = productApiSlice

@@ -5,9 +5,11 @@ import SignIn from './pages/auth/SignIn'
 import SignUp from './pages/auth/SignUp'
 import CreateCategory from './pages/Admin/CreateCategory'
 import CreateProduct from './pages/Admin/CreateProduct'
+import ProductDetailse from './pages/Product/ProductDetailse'
+import Product from './pages/Product/Product'
+import Cart from './pages/Cart'
 
 function App() {
-
   return (
     <>
       <NavigationBar/>
@@ -15,6 +17,9 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<SignIn/>}/>
         <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/product/:id' element={<ProductDetailse/>}/>
+        <Route path='/products' element={<Product/>}/>
+        <Route path='/cart/:id' element={<Cart/>}/>
         <Route path='/admin'>
             <Route path='category' element={<CreateCategory/>}/>
             <Route path='product' element={<CreateProduct/>}/>
