@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux';
 
 
 const SingleProduct = ({p}) => {
-  console.log(p);
   const [image,setImage]  = useState('')
+
   const firebase = useFirebase()
 
   const getImage = async()=>{
@@ -25,7 +25,6 @@ const SingleProduct = ({p}) => {
 
   const handleAddCart=async()=>{
      try {
-      alert(p)
        const result = await addToCart({product:p._id,user:userInfo.data._id}).unwrap()
        console.log(result);
        navigate(`/cart/${userInfo.data._id}`)
@@ -42,12 +41,16 @@ const SingleProduct = ({p}) => {
         </div>
       </Link>
       <div>
-        <h1 className='font-bold text-[#F4D03F] p-1 text-center'>{p.name}</h1>
+          <Link to={`/product/${p._id}`}>
+            <h1 className='font-bold text-[#F4D03F] p-1 text-center'>{p.name}</h1>
+          </Link>
         {/* <p className='text-[#E5E7E9]'>{(p.description).substring(0,60)}...</p> */}
-        <div className="flex justify-between">
-           <h1 className='text-green-600 font-bold p-1 ml-4 mb-3 '>Rs.{p.price+"  "}<span className='text-white font-semibold '>/pcs</span></h1>
-           <h1 className='mr-5 mt-2'><CiHeart size={22}/></h1>
-        </div>
+          <Link to={`/product/${p._id}`}>
+              <div className="flex justify-between">
+                <h1 className='text-green-600 font-bold p-1 ml-4 mb-3 '>Rs.{p.price+"  "}<span className='text-white font-semibold '>/pcs</span></h1>
+                <h1 className='mr-5 mt-2'><CiHeart size={22}/></h1>
+              </div>  
+          </Link>
         <button className='bg-pink-600 bg-opacity-20 p-1 rounded-full w-[80%] ml-6 hover:bg-opacity-100' onClick={handleAddCart}>Add to cart</button>
       </div>
     </div>          

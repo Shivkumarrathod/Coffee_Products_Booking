@@ -13,9 +13,9 @@ const Home = () => {
      <div className=' w-full mb-[5rem] flex mt-10' >
       <div className="w-[60%] flex justify-between mt-[6rem]">
         <div className='w-[5%]  flex flex-col p-2 items-center justify-center cursor-pointer'>
-          <FiInstagram className='p-1 m-2' size={30}/>
-          <FaGithub className='p-1 m-2' size={30}/>
-          <FaXTwitter className='p-1 m-2' size={30}/>
+          <FiInstagram className='p-1 m-2 hover:text-red-500' size={30}/>
+          <FaGithub className='p-1 m-2 hover:text-red-500' size={30}/>
+          <FaXTwitter className='p-1 m-2 hover:text-red-500' size={30}/>
         </div>
        <div className='w-[82%] mt-10'>
             <h1 className='font-cursive font-semibold text-5xl'>best coffee</h1>

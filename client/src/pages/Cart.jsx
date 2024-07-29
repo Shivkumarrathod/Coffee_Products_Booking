@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useGetAllUserproductsQuery } from "../redux/services/cartApiSlice"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SingleCart from "../components/SingleCart";
 import { useEffect } from "react";
 
@@ -13,12 +13,15 @@ const Cart = () => {
     refetch()
    },[refetch])
   return (
-    <div>
-        {cartProduct?.map((p)=>(
-            <div key={p._id} className="flex justify-center w-full mt-3">
-              <SingleCart p={p.product} _id={p._id} refetch={refetch}/>
-            </div>
-        ))}
+    <div >
+      {/* <div className=" mt-5 ml-[10rem] bg-[#161616] ">
+        <Link to='/products' >Go back</Link>
+      </div> */}
+          {cartProduct?.map((p)=>(
+              <div key={p._id} className="flex justify-center w-full mt-3">
+                <SingleCart p={p.product} _id={p._id} refetch={refetch}/>
+              </div>
+          ))}
     </div>
   )
 }

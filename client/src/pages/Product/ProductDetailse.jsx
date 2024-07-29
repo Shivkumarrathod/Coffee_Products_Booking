@@ -5,6 +5,7 @@ import { useFirebase } from '../../firebase/firebase';
 import { CiHeart } from "react-icons/ci";
 import {useAddToCartMutation} from '../../redux/services/cartApiSlice'
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const ProductDetailse = () => {
   const { id } = useParams();
@@ -62,6 +63,9 @@ const ProductDetailse = () => {
           <div className="flex justify-between">
             <h1 className='mt-[5rem] font-bold text-2xl'><span className='text-pink-600'>Price</span>: Rs.{product.price}</h1>
             <button className='bg-blue-600 h-[2rem] w-[11rem] mt-20 rounded-full bg-opacity-20 hover:bg-opacity-100' onClick={handleAddToCart}>Add to Cart</button>
+          </div>
+          <div className='bg-blue-600 h-[2rem] w-full  rounded-full bg-opacity-20 hover:bg-opacity-100 mt-5 flex justify-center items-center cursor-pointer'>
+            <Link to={`/order/${id}`} className='w-full text-center'>Order</Link>
           </div>
         </div>
       </div>

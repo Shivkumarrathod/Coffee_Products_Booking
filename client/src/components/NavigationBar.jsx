@@ -71,8 +71,11 @@ const NavigationBar = () => {
               <div className='absolute mt-5 -ml-[5rem]  w-[10rem] flex flex-col p-1'>
                 <button
                   onClick={handleLogout}
-                  className='text-center font-semibold p-1 border-b hover:text-red-600 border rounded-full' 
+                  className='text-center font-semibold p-1 border-b hover:text-red-600 border rounded-full mb-1' 
                 >Logout</button>
+                <Link to={`/user/${userInfo.data._id}`}
+                  className='text-center font-semibold p-1 border-b hover:text-red-600 border rounded-full' 
+                >Profile</Link >
              </div>
              )}
             </>

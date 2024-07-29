@@ -9,6 +9,7 @@ const CreateCategory = () => {
     const handleCreateCategory = async()=>{
        try {
         const res = await createCategory({name}).unwrap()
+        setName('')
         refetch()
        } catch (error) {
         console.log(error);
