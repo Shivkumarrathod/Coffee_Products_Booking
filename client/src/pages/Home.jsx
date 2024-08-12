@@ -30,9 +30,9 @@ const Home = () => {
          <img src="/coffee.jpg" alt="home image" className='rounded-full w-[27rem] h-[26rem] shaddow-lg'/>
        </div>
     </div>
-    <div className='h-[20rem] w-full bg-[#161616]'>
+    {/* <div className='h-[20rem] w-full bg-[#161616]'>
 
-    </div>
+    </div> */}
    </>
   )
 }

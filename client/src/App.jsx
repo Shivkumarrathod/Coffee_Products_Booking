@@ -10,6 +10,7 @@ import Product from './pages/Product/Product'
 import Cart from './pages/Cart'
 import OrderProduct from './pages/order/OrderProduct'
 import User from './pages/User'
+import 'toastify-js/src/toastify.css';
 
 function App() {
   return (
