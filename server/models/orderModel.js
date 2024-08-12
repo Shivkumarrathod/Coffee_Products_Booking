@@ -3,21 +3,11 @@ import { Schema ,model } from "mongoose";
 const orderSchema = new Schema({
     product:{type:Schema.Types.ObjectId,required:true,ref:'product'},
     user:{type:Schema.Types.ObjectId,required:true,ref:'User'},
-    toAddress:{
-      address:{type:String,required:true},
-      city:{type:String,required:true},
-      postalCode:{type:String,required:true},
-      country:{type:String,required:true}
-    },
+    toAddress:{type:String,required:true},
     paymentMethod :{
         type:String,required:true,
     },
-    paymentReesult :{
-        id :{type:String},
-        status :{type:String},
-        update_time :{type:String},
-        email_address :{type:String},
-    },
+    paymentResult: { type: Schema.Types.Mixed, required: true },
     isPaid :{
         type:Boolean,
         required:true,

@@ -40,7 +40,7 @@ const PayPal = ({ amount, onSuccess }) => {
     };
   }, [amount, onSuccess]);
 
-  return <div className='w-[20rem] mt-5' ref={paypalRef}></div>;
+  return <div className='w-[82%] mt-5' ref={paypalRef}></div>;
 };
 
 export default PayPal;

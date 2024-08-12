@@ -9,6 +9,7 @@ import productRoute from './routes/productRoute.js'
 import userRouter from './routes/userRoutes.js'
 import categoryRoute from './routes/categoryRoute.js'
 import cartRoute from './routes/cartRoute.js';
+import orderRoute from './routes/orderRoute.js'
 
 dotenv.config()
 const PORT = process.env.PORT || 7000
@@ -46,5 +47,6 @@ app.use('/api/users',userRouter)
 app.use('/api/category',categoryRoute)
 app.use('/api/product',productRoute)
 app.use('/api/cart',cartRoute)
+app.use('/api/order',orderRoute)
 
 app.listen(PORT,()=>console.log(`Server is connected at PORT ${PORT}`))
