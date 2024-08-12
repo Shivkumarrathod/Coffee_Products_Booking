@@ -3,6 +3,7 @@ import {useGetProductsQuery,useCreateProductMutation} from '../../redux/services
 import {useGetCategoriesQuery} from '../../redux/services/categoryapiSlice'
 import SingleProduct from '../../components/SingleProduct'
 import { useFirebase } from '../../firebase/firebase'
+import SingleAdminProduct from './SingleAdminProduct'
 
 const CreateProduct = () => {
   const {data:product,isError,isLoading,refetch} = useGetProductsQuery()
@@ -10,7 +11,7 @@ const CreateProduct = () => {
 
   const [allProducts,setAllProducts] = useState(true)
   const [createProduct,setCreateProduct] = useState(false)
-   
+   const [createCategory,setCreateCAtegory] = useState(false)
 
   const firebase = useFirebase()
 
@@ -54,15 +55,16 @@ const CreateProduct = () => {
   return (
     <div className='w-full flex'>
       <div className='bg-[#161616] w-[12%] h-[90vh] flex flex-col p-2 mt-2 ml-9'>
-        <div className={`text-center mt-2  hover:opacity-70 cursor-pointer  p-1 ${allProducts?'bg-pink-800 bg-opacity-40 rounded-md':''}`} onClick={()=>{setAllProducts(true);setCreateProduct(false)}}>All products</div>
-        <div className={`text-center mt-2  hover:opacity-70 cursor-pointer  p-1 ${createProduct?'bg-pink-800 bg-opacity-40 rounded-md':''}`} onClick={()=>{setAllProducts(false);setCreateProduct(true)}}>Create Product</div>
+        <div className={`text-center mt-2  hover:opacity-70 cursor-pointer  p-1 ${allProducts?'bg-pink-800 bg-opacity-40 rounded-md':''}`} onClick={()=>{setAllProducts(true);setCreateProduct(false);setCreateCAtegory(false)}}>All products</div>
+        <div className={`text-center mt-2  hover:opacity-70 cursor-pointer  p-1 ${createProduct?'bg-pink-800 bg-opacity-40 rounded-md':''}`} onClick={()=>{setAllProducts(false);setCreateProduct(true);setCreateCAtegory(false)}}>Create Product</div>
+        {/* <div className={`text-center mt-2  hover:opacity-70 cursor-pointer  p-1 ${createCategory?'bg-pink-800 bg-opacity-40 rounded-md':''}`} onClick={()=>{setAllProducts(false);setCreateProduct(false);setCreateCAtegory(true)}}>Create Catr</div> */}
       </div>
       <div className='bg-[#161616] w-[82%] ml-5 mt-2 '>
         {allProducts&&(
           <div className='flex flex-wrap'>
               {product?.map((p)=>(
                 <div key={p._id}>
-                  <SingleProduct p={p}/>
+                  <SingleAdminProduct p={p}/>
                 </div>
               ))}
           </div>
